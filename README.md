@@ -1,3 +1,3 @@
-### data-viz
+# Data Visualizations
 
-# relevant news images and charts given a claim
+#### Relevant news images and charts given a claim
