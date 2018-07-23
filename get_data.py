@@ -3,14 +3,19 @@ import sys
 import requests
 import json
 
-
-
 def get_results(query ="", tags=[]):
-    query_string = get_query_string(query, tags)
-    search_results = requests.get(query_string)
-    for item in decode_response(search_results.content):
-        print (item["title"])
 
+    query_string = get_query_string(query, tags)
+    for i in tags:
+        query += i
+    search_results = requests.get(query_string)
+
+    for item in decode_response(search_results.content):
+        if 'pagemap' in item:
+            image_path = item['pagemap']
+            if 'metatags' in image_path:
+                image_url = image_path['metatags']
+                print(image_url[0]['og:image'])
 
 def get_query_string(query = "", tags=[]):
     api_key = "AIzaSyCYq06CBnnF27kRI_RNnhz3S0KoQPH1cNM"
@@ -32,5 +37,5 @@ def decode_response(json_string):
         item['meta'] = meta
     return response['items']
 
-
-get_results("unemployment during 2005 in USA")
+# get_results("'chart' unemployment during 2005 in USA", ["United States of America", "Trump", ""])
+get_results("USA election 2.4 million new jobs", ["Trump", "November 2016", "jobs"])
