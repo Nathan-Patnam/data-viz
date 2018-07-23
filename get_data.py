@@ -38,4 +38,11 @@ def decode_response(json_string):
     return response['items']
 
 # get_results("'chart' unemployment during 2005 in USA", ["United States of America", "Trump", ""])
-get_results("USA election 2.4 million new jobs", ["Trump", "November 2016", "jobs"])
+images = get_results("USA election 2.4 million new jobs", ["Trump", "November 2016", "jobs"])
+
+if len(images) > 2:
+    for i in images[:2]:
+        print(i)
+else:
+    print(images[0])
+    print(images[1])
