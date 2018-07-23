@@ -1,4 +1,3 @@
-
 import sys
 import requests
 import json
@@ -9,14 +8,13 @@ def get_results(query ="", tags=[]):
     for i in tags:
         query += i
     search_results = requests.get(query_string)
-
+    results = {}
     for item in decode_response(search_results.content):
         if 'pagemap' in item:
             image_path = item['pagemap']
             if 'metatags' in image_path:
                 image_url = image_path['metatags']
-                print(image_url[0]['og:image'])
-     
+                results[image_url[0]['og:description']] = image_url[0]['og:image']
     return results
 
 def get_query_string(query = "", tags=[]):
@@ -32,7 +30,7 @@ def decode_response(json_string):
     response = json.loads(json_string)
     meta = {key: value for key, value in response.items() if key != 'items'}
     num_results = int(meta['searchInformation']['totalResults'])
-    print("number of results is")
+   # print("number of results is")
     if num_results == 0:
         return []
     for item in response['items']:
@@ -42,9 +40,4 @@ def decode_response(json_string):
 # get_results("'chart' unemployment during 2005 in USA", ["United States of America", "Trump", ""])
 images = get_results("USA election 2.4 million new jobs", ["Trump", "November 2016", "jobs"])
 
-if len(images) > 2:
-    for i in images[:2]:
-        print(i)
-else:
-    print(images[0])
-    print(images[1])
+print(images)
