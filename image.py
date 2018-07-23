@@ -33,5 +33,4 @@ def decode_response(json_string):
     return response['items']
 
 
-
 get_results("unemployment during 2005 in USA")
