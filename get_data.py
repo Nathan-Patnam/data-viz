@@ -16,6 +16,8 @@ def get_results(query ="", tags=[]):
             if 'metatags' in image_path:
                 image_url = image_path['metatags']
                 print(image_url[0]['og:image'])
+     
+    return results
 
 def get_query_string(query = "", tags=[]):
     api_key = "AIzaSyCYq06CBnnF27kRI_RNnhz3S0KoQPH1cNM"
