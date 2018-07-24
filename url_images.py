@@ -16,7 +16,8 @@ def get_images(site):
             if 'http' not in url:
                 url = '{}{}'.format(site, url)
             response = requests.get(url)
-            res.append(response)
+            content = f.write(response.content)
+            res.append(content)
     return res
 
 
