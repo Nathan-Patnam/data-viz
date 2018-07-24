@@ -7,21 +7,13 @@ def get_images(site):
     response = requests.get(site)
     soup = BeautifulSoup(response.text, 'html.parser')
     img_tags = soup.find_all('img')
-    urls = [img['src'] for img in img_tags]
-    res = []
+    images = []
+    for img in img_tags:
+        images.append(img.get('src'))
 
-    for url in urls:
-        filename = re.search(r'/([\w_-]+[.](jpg|gif|png))$', url)
-        with open(filename.group(1), 'wb') as f:
-            if 'http' not in url:
-                url = '{}{}'.format(site, url)
-            response = requests.get(url)
-            content = f.write(response.content)
-            res.append(content)
-    return res
+    return images
 
-
-images = get_images("https://www.bloomberg.com")
+images = get_images("https://www.google.com")
 
 for i in images:
     print(images)
