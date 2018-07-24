@@ -17,13 +17,13 @@ function getImage(url) {
   var request = require('request');
   var cheerio = require('cheerio');
   var url = search(["unemployment", "usa"]);
-  let $ = cheerio.load(url);
+
 
   request(url, function (error, response, html) {
     if (!error && response.statusCode == 200) {
-      var result = $('div[class="search-results"]').html();
+      let $ = cheerio.load(html);
+      var result = $('div[class=search-results]').html();
       console.log(result);
-      console.log(url);
     }
 
   });
