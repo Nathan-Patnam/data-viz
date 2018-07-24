@@ -14,7 +14,7 @@ def get_results(query ="", tags=[]):
             image_path = item['pagemap']
             if 'metatags' in image_path:
                 image_url = image_path['metatags']
-                results[image_url[0]['og:description']] = image_url[0]['og:image']
+                results[image_url[0]['og:description']] = [image_url[0]['og:image'],image_url[0]['og:url']]
     return results
 
 def get_query_string(query = "", tags=[]):
@@ -38,6 +38,6 @@ def decode_response(json_string):
     return response['items']
 
 # get_results("'chart' unemployment during 2005 in USA", ["United States of America", "Trump", ""])
-images = get_results("USA election 2.4 million new jobs", ["Trump", "November 2016", "jobs"])
+images = get_results("Rising wages Trump", ["Trump", "November 2016", "jobs"])
 
 print(images)
