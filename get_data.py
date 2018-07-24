@@ -30,14 +30,11 @@ def decode_response(json_string):
     response = json.loads(json_string)
     meta = {key: value for key, value in response.items() if key != 'items'}
     num_results = int(meta['searchInformation']['totalResults'])
-   # print("number of results is")
     if num_results == 0:
         return []
     for item in response['items']:
         item['meta'] = meta
     return response['items']
 
-# get_results("'chart' unemployment during 2005 in USA", ["United States of America", "Trump", ""])
 images = get_results("Rising wages Trump", ["Trump", "November 2016", "jobs"])
-
 print(images)
