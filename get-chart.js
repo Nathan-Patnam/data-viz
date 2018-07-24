@@ -31,11 +31,19 @@ function getImage(url) {
     var link = results.split('"')[1];
     link = "https://fred.stlouisfed.org" + link
     console.log(link);
+    screenshot(link);
     }
-
     });
 
 }
 
+const puppeteer = require('puppeteer');
+async function screenshot(url) {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(url);
+    await page.screenshot({path: 'image.png'});
+    await browser.close();
+}
 
 getImage();
